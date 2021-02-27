@@ -7,15 +7,14 @@ from selenium.webdriver.support import expected_conditions as EC
 path_webdriver = "C:\\Program Files (x86)\\chromedriver.exe"
 driver = webdriver.Chrome(path_webdriver)
 
-driver.get("https://www.instagram.com/")
-# driver.get("https://www.instagram.com/")
+driver.get("https://www.reddit.com/r/ProgrammerHumor/")
 
-#Accept cookies
-cookies_class_name = "aOOlW   HoLwm "
+# #Accept cookies
+# cookies_class_name = "aOOlW   HoLwm "
 
-# driver.find_element_by_class_name("aOOlW   HoLwm ")
-username = driver.find_element_by_name("username")
-username.send_keys("kk")
+# # driver.find_element_by_class_name("aOOlW   HoLwm ")
+# username = driver.find_element_by_name("username")
+# username.send_keys("kk")
 
 # try:
 # cookie_button = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "aOOlW   HoLwm ")))
