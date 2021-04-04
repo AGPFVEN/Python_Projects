@@ -67,7 +67,3 @@ class SpotifyAPI(object):
         self.access_token_expires = expires
         self.access_token_did_expire = expires < now
         return True
-
-client = SpotifyAPI(Spotify_Credentials.client_id, Spotify_Credentials.client_secret)
-print(client.perform_auth())
-print(client.access_token)
