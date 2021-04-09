@@ -13,7 +13,7 @@ def get_current_track(access_token):
 
     #Save data in a variable
     response_json = response.json()
-    print(response_json)
+    # print(response_json)
 
     #Process data
     track_id = response_json['item']['id']

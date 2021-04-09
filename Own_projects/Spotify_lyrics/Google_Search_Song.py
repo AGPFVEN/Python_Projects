@@ -7,11 +7,13 @@ usr_agent = {
                       
 def Search_lyrics(name_artists, name_song):
     formatted_name_artists = name_artists.replace(',', '')
-    print('{} {} lyrics'.format(formatted_name_artists, name_song))
     search_term = '{} {} lyrics'.format(formatted_name_artists, name_song)
+    print(search_term)
     escaped_search_term = search_term.replace(' ', '+')
+    return escaped_search_term
 
-    google_url = 'https://www.google.com/search?q={}'.format(escaped_search_term)
+def Google_lyrics(url):
+    google_url = 'https://www.google.com/search?q={}'.format(url)
     print(google_url)
     response = get(google_url, headers=usr_agent)
     response.raise_for_status()
@@ -22,7 +24,7 @@ def Search_lyrics(name_artists, name_song):
 def Parse_Lyrics(raw_html):
     soup = BeautifulSoup(raw_html, 'html.parser')
     result_block = list(soup.find_all('span', attrs={'jsname': 'YS01Ge'}))
-    print(result_block)
+    # print(result_block)
     for verse in result_block:
         unformatted_verse = str(verse).replace('<span jsname="YS01Ge">', '')
         formatted_verse = unformatted_verse.replace('</span>', '')
@@ -30,4 +32,4 @@ def Parse_Lyrics(raw_html):
         yield verse
 
 def Show_Lyrics(name_artists, name_song):
-    list(Parse_Lyrics(Search_lyrics(name_artists, name_song)))
+    list(Parse_Lyrics(Google_lyrics(Search_lyrics(name_artists, name_song))))
