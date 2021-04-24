@@ -4,6 +4,7 @@ import Spotify_Credentials
 from flask import Flask, request, url_for, session, redirect
 
 app = Flask(__name__)
+#-m python flask run
 
 app.config['SESSION_COOKIE_NAME'] = 'Jasons Cookie'
 
@@ -29,4 +30,3 @@ def create_spotify_Oauth():
 url_token = 'https://accounts.spotify.com/authorize'
 client_id = Spotify_Credentials.client_id
 response_type = 'code'
-
