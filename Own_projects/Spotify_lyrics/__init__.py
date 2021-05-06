@@ -10,9 +10,9 @@ while True:
 
     if(new_song_info['name'] != current_song_info_name):
 
-        print("\n\n",new_song_info)
         current_song_info_artist = new_song_info['artists']
         current_song_info_name = new_song_info['name']
         Show_Lyrics(current_song_info_artist, current_song_info_name)
+        print("\n\n",Show_Lyrics(current_song_info_artist, current_song_info_name))
     else:
         time.sleep(2)

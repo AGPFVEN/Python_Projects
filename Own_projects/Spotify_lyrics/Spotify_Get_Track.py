@@ -43,9 +43,8 @@ def Get_Track():
         current_track_info = get_current_track(Spotify_Credentials.spotify_access_token)
 
         return current_track_info
-        # time.sleep(9)
 
-# Result //
+# Result
 
 #{'id': '2QjOHCTQ1Jl3zawyYOpxh6', 'name': 'Sweater Weather', 'artists': 'The Neighbourhood', 'progress': 160790, 'duration': 240400, 'rest': 79610}
 #{'id': '5nujrmhLynf4yMoMtj8AQF', 'name': 'Levitating (feat. DaBaby)', 'artists': 'Dua Lipa, DaBaby', 'progress': 26874, 'duration': 203064, 'rest': 176190}
