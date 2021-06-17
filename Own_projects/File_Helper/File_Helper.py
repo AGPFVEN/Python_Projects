@@ -32,8 +32,12 @@ def Find_folder(my_folder, last_downloads):
         
         print("folder not found")
 
+def Analize_my_folder(my_folder):
+    print("in")
+
 last_downloads = Find_last_downloads()
-Check_folder(last_downloads)
+my_folder = Check_folder(last_downloads)
+Analize_my_folder(my_folder)
 
 #Descargas
 #BEYONDTECH EUROPE/CONTABILIDAD/Facturas EMITIDAS- Clientes -PAN EUROPEO/Pan Europa/Por Paises/España
