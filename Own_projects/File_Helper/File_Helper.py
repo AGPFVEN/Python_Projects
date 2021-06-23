@@ -18,7 +18,8 @@ def Check_folder(my_last_downloads):
     
     elif(response_input == "n"):
         print("type name of the file you want")
-        input()
+        my_folder = input()
+        Find_folder(my_folder, my_last_downloads)
 
     else:
         print("invalid response try it again:")
