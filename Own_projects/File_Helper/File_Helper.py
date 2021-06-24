@@ -17,7 +17,8 @@ def Check_folder(my_last_downloads):
         return last_download
     
     elif(response_input == "n"):
-        print("no")
+        print("type name of the file you want")
+        input()
 
     else:
         print("invalid response try it again:")
