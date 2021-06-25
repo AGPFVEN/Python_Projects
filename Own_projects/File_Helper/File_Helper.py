@@ -23,7 +23,7 @@ def Check_folder(my_last_downloads):
         print("invalid response try it again:")
         Check_folder(my_last_downloads)
 
-def Find_folder__(my_folder, last_downloads):
+def Find_folder(my_folder, last_downloads):
     for elements in last_downloads:
         if(my_folder == elements):
             return elements
