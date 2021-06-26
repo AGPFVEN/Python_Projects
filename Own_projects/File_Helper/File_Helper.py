@@ -8,7 +8,7 @@ def Find_last_downloads():
     return first_files
     
 def Check_folder(my_last_downloads):
-    print("is this your folder? y/n")
+    print("is this your folder? type y/n and press enter")
     last_download = my_last_downloads[0]
     print(last_download)
     response_input = input()
@@ -21,7 +21,7 @@ def Check_folder(my_last_downloads):
 
     else:
         print("invalid response try it again:")
-        Check_folder(last_download)
+        Check_folder(my_last_downloads)
 
 def Find_folder__(my_folder, last_downloads):
     for elements in last_downloads:
@@ -30,9 +30,8 @@ def Find_folder__(my_folder, last_downloads):
         
         print("folder not found")
 
-
-
 last_downloads = Find_last_downloads()
+Check_folder(last_downloads)
 
 #Descargas
 #BEYONDTECH EUROPE/CONTABILIDAD/Facturas EMITIDAS- Clientes -PAN EUROPEO/Pan Europa/Por Paises/España
