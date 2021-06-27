@@ -32,7 +32,7 @@ def Find_folder__(my_folder, last_downloads):
 
 
 
-
+last_downloads = Find_last_downloads()
 
 #Descargas
 #BEYONDTECH EUROPE/CONTABILIDAD/Facturas EMITIDAS- Clientes -PAN EUROPEO/Pan Europa/Por Paises/España
