@@ -23,15 +23,12 @@ def Check_folder(my_last_downloads):
         print("invalid response try it again:")
         Check_folder(last_download)
 
-def Find_folder__(my_folder):
-    path = r'C:\Users\alfon\Downloads'
-    first_files = os.listdir(path)
-    
-    for elements in first_files:
-        if(my_folder == "elements"):
+def Find_folder__(my_folder, last_downloads):
+    for elements in last_downloads:
+        if(my_folder == elements):
             return elements
         
-        print("not found")
+        print("folder not found")
 
 
 
