@@ -1,24 +1,27 @@
 import os,shutil
 from pathlib import Path
 
-def Find_folder():
+def Find_last_downloads():
     path = r'C:\Users\alfon\Downloads'
     # first_files = os.listdir(path)
-    first_files = sorted(Path(path).iterdir(), key=os.path.getmtime)
-    print(first_files)
+    first_files = list(reversed(sorted(Path(path).iterdir(), key=os.path.getmtime)))
+    return first_files
+    
+def Check_folder(my_last_downloads):
     print("is this your folder? y/n")
-    fist_file = first_files[0]
+    last_download = my_last_downloads[0]
+    print(last_download)
     response_input = input()
     
     if(response_input == "y"):
-        return fist_file
+        return last_download
     
     elif(response_input == "n"):
         print("no")
 
     else:
         print("invalid response try it again:")
-        Find_folder()
+        Check_folder(last_download)
 
 def Find_folder__(my_folder):
     path = r'C:\Users\alfon\Downloads'
@@ -31,7 +34,6 @@ def Find_folder__(my_folder):
         print("not found")
 
 
-print(Find_folder())
 
 
 
