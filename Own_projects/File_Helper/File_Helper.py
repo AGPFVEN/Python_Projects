@@ -33,7 +33,10 @@ def Find_folder(my_folder, last_downloads):
         print("folder not found")
 
 def Analize_my_folder(my_folder):
-    print("in")
+    list_of_files = os.listdir(my_folder)
+    for elements in list_of_files:
+        if "ES" in elements:
+            print("España")
 
 last_downloads = Find_last_downloads()
 my_folder = Check_folder(last_downloads)
