@@ -2,11 +2,15 @@ import os,shutil
 from pathlib import Path
 
 def Find_last_downloads():
-    path = r'C:\Users\alfon\Downloads'
+    path = r'/Users/gianinafernandez/Downloads'
     # first_files = os.listdir(path)
     first_files = list(reversed(sorted(Path(path).iterdir(), key=os.path.getmtime)))
     return first_files
-    
+
+def Beuty_Paths(my_list_of_paths):
+    for element in my_list_of_paths:
+        yield str(element).replace("PosixPath(", "")
+
 def Check_folder(my_last_downloads):
     print("is this your folder? type y/n and press enter")
     last_download = my_last_downloads[0]
@@ -38,7 +42,7 @@ def Analize_my_folder(my_folder):
         if "ES" in elements:
             print("España")
 
-last_downloads = Find_last_downloads()
+last_downloads = list(Beuty_Paths(Find_last_downloads()))
 my_folder = Check_folder(last_downloads)
 Analize_my_folder(my_folder)
 
