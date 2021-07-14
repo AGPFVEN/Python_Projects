@@ -6,10 +6,6 @@ def Find_last_downloads():
     # first_files = os.listdir(path)
     first_files = list(reversed(sorted(Path(path).iterdir(), key=os.path.getmtime)))
     return first_files
-
-def Beuty_Paths(my_list_of_paths):
-    for element in my_list_of_paths:
-        yield element.replace("WindowsPath(", "")
     
 def Check_folder(my_last_downloads):
     print("is this your folder? type y/n and press enter")
@@ -42,10 +38,9 @@ def Analize_my_folder(my_folder):
         if "ES" in elements:
             print("España")
 
-last_downloads = list(Beuty_Paths(Find_last_downloads()))
-print(last_downloads)
-#my_folder = Check_folder(last_downloads)
-#Analize_my_folder(my_folder)
+last_downloads = Find_last_downloads()
+my_folder = Check_folder(last_downloads)
+Analize_my_folder(my_folder)
 
 #Descargas
 #BEYONDTECH EUROPE/CONTABILIDAD/Facturas EMITIDAS- Clientes -PAN EUROPEO/Pan Europa/Por Paises/España
