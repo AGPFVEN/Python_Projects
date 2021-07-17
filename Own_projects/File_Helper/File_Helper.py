@@ -1,15 +1,14 @@
 import os,shutil
 from pathlib import Path
+from typing import Type
 
-def Find_last_downloads():
-    path = r'C:\Users\alfon\Downloads'
-    # first_files = os.listdir(path)
+def Retrive_files(path): #retrives archives from a folder (returns Posix not strings)
     first_files = list(reversed(sorted(Path(path).iterdir(), key=os.path.getmtime)))
     return first_files
     
-def Check_folder(my_last_downloads):
+def Check_folder(my_last_downloads): #check if the file is the correct one
     print("is this your folder? type y/n and press enter")
-    last_download = my_last_downloads[0]
+    last_download = my_last_downloads[1]    
     print(last_download)
     response_input = input()
     
@@ -25,22 +24,22 @@ def Check_folder(my_last_downloads):
         print("invalid response try it again:")
         Check_folder(my_last_downloads)
 
-def Find_folder(my_folder, last_downloads):
-    for elements in last_downloads:
-        if(my_folder == elements):
-            return elements
-        
-        print("folder not found")
+def Find_folder(my_folder, last_downloads): #Search a folder or file
+    for element in last_downloads:
+        if "/Users/gianinafernandez/Downloads/" + my_folder == str(element):
+            return element
 
-def Analize_my_folder(my_folder):
-    list_of_files = os.listdir(my_folder)
-    for elements in list_of_files:
-        if "ES" in elements:
-            print("España")
+    print(my_folder + " Not found")
 
-last_downloads = Find_last_downloads()
-my_folder = Check_folder(last_downloads)
+def Analize_my_folder(my_files):
+    for element in my_files:
+        if "ES" in element:
+            print("ESSSS")
+
+my_downloads = Retrive_files(r'/Users/gianinafernandez/Downloads')
+my_folder = Retrive_files(Check_folder(Retrive_files(r'/Users/gianinafernandez/Downloads')))
 Analize_my_folder(my_folder)
 
 #Descargas
+#taxInvoice_a59a69add60f2eed6c934e0e49ad6684cf54edb4
 #BEYONDTECH EUROPE/CONTABILIDAD/Facturas EMITIDAS- Clientes -PAN EUROPEO/Pan Europa/Por Paises/España
