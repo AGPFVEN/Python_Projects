@@ -53,11 +53,12 @@ def Extract_DocNum_of_pdf(doc_text):
             if (str.isdecimal(new_elements[0])and str.isdecimal(new_elements[1]) and str.isdecimal(new_elements[2])):
                 return elements
     
-# INV-ES-910864895-2021-184.pdf
+# INV-ES-910864895-2021-184.pdf INV-DE-910864895-2021-40.pdf
 
-doc_text = Extract_Doc_text("INV-ES-910864895-2021-184.pdf")
+doc_text = Extract_Doc_text("INV-DE-910864895-2021-40.pdf")
 docNum = Extract_DocNum_of_pdf(doc_text)
 list_Of_Docs = Group_DocId_By_DocNum()
+
 for i in list_Of_Docs:
     if ("id" in i):
         new_docId = i
