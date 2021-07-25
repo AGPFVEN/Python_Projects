@@ -44,7 +44,9 @@ def Group_DocId_By_DocNum():
 def Extract_Doc_text(filename): #This function can fail be carefull
     text = high_level.extract_text(filename)
     text_separated_by_new_line = text.split("\n")
-    return text_separated_by_new_line
+    for element in text_separated_by_new_line:
+        if(element != ""):
+            yield element
 
 def Extract_DocNum_of_pdf(doc_text):
     for elements in doc_text:
@@ -52,10 +54,20 @@ def Extract_DocNum_of_pdf(doc_text):
         if 3 == len(new_elements): 
             if (str.isdecimal(new_elements[0])and str.isdecimal(new_elements[1]) and str.isdecimal(new_elements[2])):
                 return elements
+
+def Extract_info_of_pdf(doc_text):
+    id_ = 0
+    for elements in doc_text:
+        if("Karsten Otto" in elements):
+            return id_, elements
+
+        id_ += 1
+            
+
     
 # INV-ES-910864895-2021-184.pdf INV-DE-910864895-2021-40.pdf
 
-doc_text = Extract_Doc_text("INV-DE-910864895-2021-40.pdf")
+doc_text = Extract_Doc_text("CN-DE-910864895-2021-3.pdf")
 docNum = Extract_DocNum_of_pdf(doc_text)
 list_Of_Docs = Group_DocId_By_DocNum()
 
@@ -72,4 +84,5 @@ for i in list_Of_Docs:
 docIds = new_docId.split("\"")
 docId = docIds[3]
 Doc = Get_Doc_by_DocId(docId)
-print(doc_text)
+doc_info = Extract_info_of_pdf(doc_text)
+print(doc_info)
