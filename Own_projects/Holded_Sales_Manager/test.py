@@ -1,4 +1,6 @@
-from os import replace
+import os
+from pathlib import Path
+from posix import listdir
 from pdfminer import high_level
 from pdf2image import convert_from_path
 import requests
@@ -63,8 +65,6 @@ def Extract_info_of_pdf(pdf_text, doc_name_):
     for element in pdf_text:
 
         if doc_name_ == element:
-            print(doc_name_)
-            print(element)
             k = pdf_text.index(element)
             fecha = pdf_text[k - 2]
 
@@ -80,6 +80,20 @@ def Extract_info_of_pdf(pdf_text, doc_name_):
 
             return nombre, fecha
 
+def Extract_eur(doc_text):
+    array = []
+
+    for element in doc_text:
+        if "€" in element:
+            array.append(element)
+    
+    if (len(array)>3):
+        final_array = [array[0], array[-4], array[-1]]
+
+        return final_array
+
+    return array
+
 
 def Generator_to_array(generator):
     array = []
@@ -89,44 +103,55 @@ def Generator_to_array(generator):
 
     return array
 
-# INV-DE-910864895-2021-40.pdf CN-DE-910864895-2021-3.pdf CN-FR-910864895-2021-3.pdf INV-FR-910864895-2021-65.pdf
-
-#Extract_info_of_pdf('INV-ES-910864895-2021-184.pdf')
-
+def Get_files(path_):
+    folder = os.path.realpath(path_)
+    files = listdir(folder)
+    return files
 
 # doc_name = "INV-DE-910864895-2021-40.pdf"
 # doc_name = "CN-DE-910864895-2021-3.pdf"
 # doc_name = "CN-FR-910864895-2021-3.pdf"
 doc_name = "INV-FR-910864895-2021-65.pdf"
 
-doc_text = Extract_Doc_text(doc_name)
-docNum = Extract_DocNum_of_pdf(doc_text)
-list_Of_Docs = Group_DocId_By_DocNum()
+def Get_all_info(doc_name):
+    doc_text = Extract_Doc_text(doc_name)
+    docNum = Extract_DocNum_of_pdf(doc_text)
+    list_Of_Docs = Group_DocId_By_DocNum()
 
-for i in list_Of_Docs:
-    if ("id" in i):
-        new_docId = i
+    for i in list_Of_Docs:
+        if ("id" in i):
+            new_docId = i
 
-    if ("desc" in i):
-        new_docNum = i 
+        if ("desc" in i):
+            new_docNum = i 
 
-        if(docNum in new_docNum):
-            break
+            if(docNum in new_docNum):
+                break
 
-docIds = new_docId.split("\"")
-docId = docIds[3]
-Doc = Get_Doc_by_DocId(docId)
+    docIds = new_docId.split("\"")
+    docId = docIds[3]
+    Doc = Get_Doc_by_DocId(docId)
 
 
-doc_text_ = Extract_Doc_text(doc_name)
-array_text = Generator_to_array(doc_text_)
-doc_info = Extract_info_of_pdf(array_text, doc_name.replace('.pdf', ""))
-print(array_text)
-print(doc_info)
-# print(array_text.index(doc_info))
+    doc_text_ = Extract_Doc_text(doc_name)
+    array_text = Generator_to_array(doc_text_)
+    
+    doc_name_ = str(doc_name).split(r'/')
+    _doc_name_ = doc_name_[-1].replace('.pdf', "")
 
-# for i in doc_text:
-#     print(i)
-# kk =Generator_to_array(Extract_Doc_text('INV-DE-910864895-2021-40.pdf'))
-# print(kk[1])
-# print(high_level.extract_text('INV-DE-910864895-2021-40.pdf'))
+    doc_info = Extract_info_of_pdf(array_text, _doc_name_)
+    doc_info_eur = Extract_eur(array_text)
+    
+    return Doc, doc_info, doc_info_eur 
+
+def Retrive_files(path): #retrives archives from a folder (returns Posix not strings)
+    first_files = list(reversed(sorted(Path(path).iterdir(), key=os.path.getmtime)))
+    return first_files
+
+
+path_ = r'/Volumes/GoogleDrive/Unidades compartidas/BEYONDTECH EUROPE/CONTABILIDAD/Facturas EMITIDAS- Clientes -PAN EUROPEO/Pan Europeo/Por Paises/Alemania/2021/3.- Marzo'
+files = Retrive_files(path_)
+
+for file in files:
+    all_info = Get_all_info(file)
+    print(all_info)
